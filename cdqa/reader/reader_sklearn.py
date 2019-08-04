@@ -369,7 +369,8 @@ def predict(input_file, args, model, tokenizer, prefix=""):
     output_prediction_file = os.path.join(args.output_dir, "predictions_{}.json".format(prefix))
     output_nbest_file = os.path.join(args.output_dir, "nbest_predictions_{}.json".format(prefix))
     output_null_log_odds_file = os.path.join(args.output_dir, "null_odds_{}.json".format(prefix))
-
+    out_eval = {}
+    
     if args.model_type in ['xlnet', 'xlm']:
         # XLNet uses a more complex post-processing procedure
         out_eval, final_prediction = write_predictions_extended(examples, features, all_results, args.n_best_size,
@@ -378,7 +379,6 @@ def predict(input_file, args, model, tokenizer, prefix=""):
                         model.config.start_n_top, model.config.end_n_top,
                         args.version_2_with_negative, tokenizer, args.verbose_logging)
     else:
-       out_eval = {}
        final_prediction = write_predictions(examples, features, all_results, args.n_best_size,
                         args.max_answer_length, args.do_lower_case, output_prediction_file,
                         output_nbest_file, output_null_log_odds_file, args.verbose_logging,
