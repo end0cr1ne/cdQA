@@ -901,11 +901,10 @@ def write_predictions_extended(all_examples, all_features, all_results, n_best_s
     has_ans_qids = [k for k, v in qid_to_has_ans.items() if v]
     no_ans_qids = [k for k, v in qid_to_has_ans.items() if not v]
     exact_raw, f1_raw = get_raw_scores(orig_data, all_predictions)
-    out_eval = {}
 
     # find_all_best_thresh_v2(out_eval, all_predictions, exact_raw, f1_raw, scores_diff_json, qid_to_has_ans)
 
-    return out_eval, final_prediction
+    return final_prediction
 
 
 def get_final_text(pred_text, orig_text, do_lower_case, verbose_logging=False):
