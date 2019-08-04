@@ -43,7 +43,7 @@ from pytorch_transformers import AdamW, WarmupLinearSchedule
 
 from cdqa.reader.utils_squad import (read_squad_examples, convert_examples_to_features,
                          RawResult, write_predictions,
-                         RawResultExtended, write_predictions_extended)
+                         RawResultExtended)
 
 # The follwing import is the official SQuAD evaluation script (2.0).
 # You can remove it from the dependencies if you are using this script outside of the library
