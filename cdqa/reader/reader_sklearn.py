@@ -370,18 +370,18 @@ def predict(input_file, args, model, tokenizer, prefix=""):
     output_nbest_file = os.path.join(args.output_dir, "nbest_predictions_{}.json".format(prefix))
     output_null_log_odds_file = os.path.join(args.output_dir, "null_odds_{}.json".format(prefix))
     
-    if args.model_type in ['xlnet', 'xlm']:
-        # XLNet uses a more complex post-processing procedure
-        out_eval, final_prediction = write_predictions_extended(examples, features, all_results, args.n_best_size,
-                        args.max_answer_length, output_prediction_file,
-                        output_nbest_file, output_null_log_odds_file, input_file,
-                        model.config.start_n_top, model.config.end_n_top,
-                        args.version_2_with_negative, tokenizer, args.verbose_logging)
-    else:
-       final_prediction = write_predictions(examples, features, all_results, args.n_best_size,
-                        args.max_answer_length, args.do_lower_case, output_prediction_file,
-                        output_nbest_file, output_null_log_odds_file, args.verbose_logging,
-                        args.version_2_with_negative, args.null_score_diff_threshold)
+#     if args.model_type in ['xlnet', 'xlm']:
+#         # XLNet uses a more complex post-processing procedure
+#         out_eval, final_prediction = write_predictions_extended(examples, features, all_results, args.n_best_size,
+#                         args.max_answer_length, output_prediction_file,
+#                         output_nbest_file, output_null_log_odds_file, input_file,
+#                         model.config.start_n_top, model.config.end_n_top,
+#                         args.version_2_with_negative, tokenizer, args.verbose_logging)
+#     else:
+     final_prediction = write_predictions(examples, features, all_results, args.n_best_size,
+                      args.max_answer_length, args.do_lower_case, output_prediction_file,
+                      output_nbest_file, output_null_log_odds_file, args.verbose_logging,
+                      args.version_2_with_negative, args.null_score_diff_threshold)
 
     return final_prediction
 
@@ -579,6 +579,6 @@ class Reader(BaseEstimator):
 
     def predict(self, X):
 
-        out_eval, final_prediction = predict(input_file=X, args=self, model=self.model, tokenizer=self.tokenizer, prefix="")
+        final_prediction = predict(input_file=X, args=self, model=self.model, tokenizer=self.tokenizer, prefix="")
 
-        return out_eval, final_prediction
+        return final_prediction
