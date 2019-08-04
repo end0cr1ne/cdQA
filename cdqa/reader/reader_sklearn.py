@@ -369,7 +369,6 @@ def predict(input_file, args, model, tokenizer, prefix=""):
     output_prediction_file = os.path.join(args.output_dir, "predictions_{}.json".format(prefix))
     output_nbest_file = os.path.join(args.output_dir, "nbest_predictions_{}.json".format(prefix))
     output_null_log_odds_file = os.path.join(args.output_dir, "null_odds_{}.json".format(prefix))
-    out_eval = {}
     
     if args.model_type in ['xlnet', 'xlm']:
         # XLNet uses a more complex post-processing procedure
@@ -384,7 +383,7 @@ def predict(input_file, args, model, tokenizer, prefix=""):
                         output_nbest_file, output_null_log_odds_file, args.verbose_logging,
                         args.version_2_with_negative, args.null_score_diff_threshold)
 
-    return out_eval, final_prediction
+    return final_prediction
 
 class Reader(BaseEstimator):
     """
